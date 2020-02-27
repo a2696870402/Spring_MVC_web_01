@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/tx
+                http://www.springframework.org/schema/tx/spring-tx.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/aop
+                http://www.springframework.org/schema/aop/spring-aop.xsd
+                http://www.springframework.org/schema/mvc
+                http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--
+    访问过程：
+    1.request
+    2.handler到处理器映射器
+    3.到处理器适配器 请求适配器
+    4.执行Controller，返回model 和 view
+    5.视图解析器解析view，返回到jsp上，数据显示在jsp上
+    -->
+
+    <!--非注解配置-->
+    <!--添加处理器映射-->
+    <!--<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>-->
+
+    <!--<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">-->
+        <!--<property name="mappings">-->
+            <!--<props>-->
+                <!--<prop key="/queryFruits_test1.action">fruitsController</prop>-->
+                <!--<prop key="/queryFruits_test2.action">fruitsController</prop>-->
+                <!--<prop key="/queryFruits_test3.action">fruitsController2</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!--<bean id="fruitsController" class="cn.com.mvc.controller.FruitsController"/>-->
+    <!--<bean id="fruitsController2" class="cn.com.mvc.controller.FruitsControllerTest2"/>-->
+
+    <!--注解配置-->
+    <!--注解的处理器和映射器-->
+    <!--在Controller中添加注解，以及在RequestMapping添加请求名即可-->
+    <!--使用context进行扫描包的请求-->
+    <mvc:annotation-driven/>
+
+    <context:component-scan base-package="cn.com.mvc.controller"/>
+
+    <!--使用手动配置-->
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>-->
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>-->
+    <!--<bean class="cn.com.mvc.controller.FruitsControllerTest3"/>-->
+
+
+
+    <!--添加处理器适配器-->
+    <!--<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>-->
+    <!--<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>-->
+
+
+
+    <!--添加视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/fruits"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean name="/queryFruits_test.action" class="cn.com.mvc.controller.FruitsController"/>
+
+</beans>
