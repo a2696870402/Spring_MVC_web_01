@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("query")
+@RequestMapping("/query")
 public class FruitsControllerTest4 {
     private FruitsService fruitsService=new FruitsService();
 
-    @RequestMapping("queryFruitsByCondition")
+    @RequestMapping("/queryFruitsByCondition")
     public String queryFruitsByCondition(Model model, Fruits fruits){
         List<Fruits> fruitsList=null;
 
@@ -27,6 +27,13 @@ public class FruitsControllerTest4 {
         }
         model.addAttribute("fruitsList",fruitsList);
         return "/fruitsFind";
+    }
+    @RequestMapping("/queryCheckBox")
+    public String queryCheckBox(Model model){
+        List<Fruits> fruitsList=null;
+        fruitsList=fruitsService.queryFruitsList();
+        model.addAttribute("fruitsList",fruitsList);
+        return "/fruitsCheckBox";
 
     }
 }

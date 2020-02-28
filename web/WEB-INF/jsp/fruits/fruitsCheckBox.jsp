@@ -7,12 +7,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    request.setCharacterEncoding("UTF-8");
+    response.setCharacterEncoding("UTF-8");
+%>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-    <form action="" method="post">
+    <form action="<%=path%>/check/checkqueryById.action" method="post">
         <table width="300px" border=1>
             <tr>
                 <td>名称</td>
